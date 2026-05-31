@@ -41,3 +41,34 @@ resource "aws_lb_target_group" "this" {
   }
 }
 
+# ── Application Load Balancer ─────────────────────────────────────────────────
+resource "aws_lb" "this" {
+  name               = "${var.environment}-alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.alb.id]
+  subnets            = data.aws_subnets.public.ids
+
+  tags = {
+    Name = "${var.environment}-alb"
+  }
+}
+
+# ── HTTP listener ─────────────────────────────────────────────────────────────
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.this.arn
+  port              = var.listener_port
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.this.arn
+  }
+}
+
+# ── Target group attachment ────────────────────────────────────────────────────
+resource "aws_lb_target_group_attachment" "api" {
+  target_group_arn = aws_lb_target_group.this.arn
+  target_id        = data.aws_instance.api.id
+  port             = 80
+}
