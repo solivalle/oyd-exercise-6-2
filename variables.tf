@@ -18,13 +18,13 @@ variable "instance_name" {
   default     = "mediastream-api"
 }
 
-variable listener_port {
+variable "listener_port" {
   type        = number
   description = "Port on which the API server listens."
   default     = 80
 }
 
-variable environment {
+variable "environment" {
   type        = string
   description = "Deployment environment (e.g., dev, staging, prod)."
   default     = "dev"
