@@ -1,0 +1,9 @@
+% terraform state list
+data.aws_instance.api
+data.aws_subnets.public
+data.aws_vpc.main
+aws_lb.this
+aws_lb_listener.http
+aws_lb_target_group.this
+aws_lb_target_group_attachment.api
+aws_security_group.alb

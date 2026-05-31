@@ -1,0 +1,26 @@
+# Exercise 6.1
+
+## Evidence
+
+### terraform output
+
+```text
+% terraform output
+alb_arn = "arn:aws:elasticloadbalancing:us-west-2:245261108553:loadbalancer/app/dev-alb/c7d4278d5e64eece"
+alb_dns_name = "dev-alb-161447288.us-west-2.elb.amazonaws.com"
+target_group_arn = "arn:aws:elasticloadbalancing:us-west-2:245261108553:targetgroup/dev-tg/a4d23c2c1f17a5d8"
+```
+
+### terraform state list
+
+```text
+% terraform state list
+data.aws_instance.api
+data.aws_subnets.public
+data.aws_vpc.main
+aws_lb.this
+aws_lb_listener.http
+aws_lb_target_group.this
+aws_lb_target_group_attachment.api
+aws_security_group.alb
+```
